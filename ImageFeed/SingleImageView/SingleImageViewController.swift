@@ -5,7 +5,7 @@ final class SingleImageViewController: UIViewController {
     var scrollView = UIScrollView()
     var imageView = UIImageView()
     
-    lazy var backwardButton: UIButton = {
+    lazy private var backwardButton: UIButton = {
         let backwardButton = UIButton(type: .custom)
         backwardButton.setImage(.init(resource: .backward), for: .normal)
         backwardButton.addTarget(
@@ -17,7 +17,7 @@ final class SingleImageViewController: UIViewController {
         return backwardButton
     }()
     
-    lazy var shareButton: UIButton = {
+    lazy private var shareButton: UIButton = {
         let sharingButton = UIButton(type: .custom)
         sharingButton.setImage(.init(resource: .sharing), for: .normal)
         sharingButton.addTarget(
@@ -54,7 +54,7 @@ final class SingleImageViewController: UIViewController {
         rescaleAndCenterImageInScrollView(image: image)
     }
     
-    func createScrollView() {
+    private func createScrollView() {
         scrollView = UIScrollView(frame: self.view.bounds)
         scrollView.maximumZoomScale = 1.25
         scrollView.minimumZoomScale = 0.1
@@ -64,11 +64,11 @@ final class SingleImageViewController: UIViewController {
         view.backgroundColor = .ypBlack
     }
     
-    func createButtons() {
+    private func createButtons() {
         view.addSubview(backwardButton)
         view.addSubview(shareButton)
         NSLayoutConstraint.activate([
-            backwardButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 9),
+            backwardButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 9),
             backwardButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
             backwardButton.widthAnchor.constraint(equalToConstant: 24),
             backwardButton.heightAnchor.constraint(equalToConstant: 24),
@@ -80,7 +80,7 @@ final class SingleImageViewController: UIViewController {
         ])
     }
     
-    func rescaleAndCenterImageInScrollView(image: UIImage) {
+    private func rescaleAndCenterImageInScrollView(image: UIImage) {
         let maximumZoomScale = scrollView.maximumZoomScale
         let minimumZoomScale = scrollView.minimumZoomScale
         
@@ -98,11 +98,11 @@ final class SingleImageViewController: UIViewController {
         scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
     }
     
-    @objc func didTapBackwardButton() {
+    @objc private func didTapBackwardButton() {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func didTapShareButton() {
+    @objc private func didTapShareButton() {
         guard let image else { return }
         let sharing = UIActivityViewController(
             activityItems: [image],

@@ -2,7 +2,7 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
-    private var userPhotoImageView: UIImageView = {
+    lazy private var userPhotoImageView: UIImageView = {
         let profileImage = UIImage(systemName: "person.crop.circle.fill")
         let imageView = UIImageView(image: profileImage)
         let image = UIImage(named: "userPhoto")
@@ -12,7 +12,7 @@ final class ProfileViewController: UIViewController {
         return imageView
     }()
     
-    private var loginLabel: UILabel = {
+    lazy private var loginLabel: UILabel = {
         let loginLabel = UILabel()
         loginLabel.text = "Екатерина Новикова"
         loginLabel.textColor = .ypWhite
@@ -22,26 +22,27 @@ final class ProfileViewController: UIViewController {
         return loginLabel
     }()
     
-    private var emailLabel: UILabel = {
+    lazy private var emailLabel: UILabel = {
         let emailLabel = UILabel()
         emailLabel.text = "@ekaterina_nov"
-        emailLabel.textColor = .ypWhite
+        emailLabel.textColor = .ypGray
         let font = UIFont.systemFont(ofSize: 13, weight: .regular)
         emailLabel.font = font
         emailLabel.translatesAutoresizingMaskIntoConstraints = false
         return emailLabel
     }()
     
-    private var descriptionLabel: UILabel = {
+    lazy private var descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
         descriptionLabel.text = "Hello"
         descriptionLabel.textColor = .ypWhite
         let font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        descriptionLabel.font = font
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         return descriptionLabel
     }()
     
-    lazy var forwardButton: UIButton = {
+    lazy private var forwardButton: UIButton = {
         let forwardButton = UIButton(type: .custom)
         forwardButton.setImage(.init(resource: .exit), for: .normal)
         forwardButton.addTarget(
@@ -64,7 +65,7 @@ final class ProfileViewController: UIViewController {
         addForwardButton()
     }
     
-    func addUserPhotoImageView() {
+    private func addUserPhotoImageView() {
         view.addSubview(userPhotoImageView)
         
         NSLayoutConstraint.activate([
@@ -75,7 +76,7 @@ final class ProfileViewController: UIViewController {
         ])
     }
     
-    func addLoginLabel(){
+    private func addLoginLabel(){
         view.addSubview(loginLabel)
         
         NSLayoutConstraint.activate([
@@ -84,7 +85,7 @@ final class ProfileViewController: UIViewController {
         ])
     }
     
-    func addEmailLabel() {
+    private func addEmailLabel() {
         view.addSubview(emailLabel)
         
         NSLayoutConstraint.activate([
@@ -93,7 +94,7 @@ final class ProfileViewController: UIViewController {
         ])
     }
     
-    func addDescriptionLabel() {
+    private func addDescriptionLabel() {
         view.addSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([
@@ -102,7 +103,7 @@ final class ProfileViewController: UIViewController {
         ])
     }
     
-    func addForwardButton() {
+    private func addForwardButton() {
         view.addSubview(forwardButton)
         
         NSLayoutConstraint.activate([
@@ -114,7 +115,7 @@ final class ProfileViewController: UIViewController {
     }
     
     @objc
-    func didTapLogoutButton() {
+    private func didTapLogoutButton() {
         
     }
 }
