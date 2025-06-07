@@ -5,7 +5,7 @@ final class ProfileViewController: UIViewController {
     lazy private var userPhotoImageView: UIImageView = {
         let profileImage = UIImage(systemName: "person.crop.circle.fill")
         let imageView = UIImageView(image: profileImage)
-        let image = UIImage(named: "userPhoto")
+        let image = UIImage(resource: .userPhoto)
         imageView.image = image
         imageView.backgroundColor = .ypBlack
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -58,6 +58,8 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .ypBlack
+        
         addUserPhotoImageView()
         addLoginLabel()
         addEmailLabel()
@@ -72,7 +74,7 @@ final class ProfileViewController: UIViewController {
             userPhotoImageView.widthAnchor.constraint(equalToConstant: 70),
             userPhotoImageView.heightAnchor.constraint(equalToConstant: 70),
             userPhotoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
-            userPhotoImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            userPhotoImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
         ])
     }
     
@@ -116,6 +118,10 @@ final class ProfileViewController: UIViewController {
     
     @objc
     private func didTapLogoutButton() {
+        guard let window = UIApplication.shared.windows.first else { return }
         
+        OAuth2TokenStorage().token = nil
+        
+        window.rootViewController = UINavigationController(rootViewController: AuthViewController())
     }
 }

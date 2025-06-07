@@ -45,13 +45,10 @@ final class SingleImageViewController: UIViewController {
         super.viewDidLoad()
         
         imageView.image = image
-        guard let image = image else { return }
-        imageView.frame.size = image.size
         
         createScrollView()
         scrollView.delegate = self
         createButtons()
-        rescaleAndCenterImageInScrollView(image: image)
     }
     
     private func createScrollView() {
@@ -112,7 +109,7 @@ final class SingleImageViewController: UIViewController {
     }
 }
 extension SingleImageViewController: UIScrollViewDelegate {
-    func viewForZooming( in scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
 }
