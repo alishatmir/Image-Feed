@@ -17,7 +17,7 @@ final class SplashViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .ypBackground
         
-        addSplashScreenImageView()
+        setupSplashImage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,25 +28,25 @@ final class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if oauth2TokenStorage.token != nil {
-            jumpToTapBarController()
+            showMainInterface()
         } else {
-            jumpAuthentication()
+            showAuthScreen()
         }
     }
     
-    func jumpToTapBarController() {
+    func showMainInterface() {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
         let tabBarController = TabBarController()
         window.rootViewController = tabBarController
     }
     
-    func jumpAuthentication() {
+    func showAuthScreen() {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
         let nc = UINavigationController(rootViewController: AuthViewController())
         window.rootViewController = nc
     }
     
-    private func addSplashScreenImageView() {
+    private func setupSplashImage() {
         view.addSubview(splashScreenImageView)
         
         NSLayoutConstraint.activate([
